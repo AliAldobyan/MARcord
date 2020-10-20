@@ -1,7 +1,16 @@
 // Authentication
 export { login, logout, signup, checkForExpiredToken } from "./authentication";
 
-// Types (the Heba method)
+// Types
 export { SET_CURRENT_USER } from "./actionTypes";
 
+//Channels
 export * from "./channels";
+
+
+// Errors
+export { resetErrors } from "./errors";
+
+// Messages
+export { fetchMessages, postMessage } from "./messages"
+
