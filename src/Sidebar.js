@@ -4,22 +4,22 @@ import { connect } from "react-redux";
 import { logout } from "./redux/actions";
 
 const Sidebar = ({ user, logout }) => (
-  <div>
+  <div className="container">
     <div className="fixed-top">
       {user ? (
         <Link
           to="/logout"
-          className="btn btn-danger m-2 float-left"
+          className="btn btn-danger m-2 float-center"
           onClick={() => logout()}
         >
           Logout {user.username}
         </Link>
       ) : (
         <div>
-          <Link to="/login" className="btn btn-info m-2 float-left">
+          <Link to="/login" className="btn btn-info m-2 float-center">
             Login
           </Link>
-          <Link to="/signup" className="btn btn-success m-2 float-left">
+          <Link to="/signup" className="btn btn-success m-2 float-center">
             Signup
           </Link>
         </div>
