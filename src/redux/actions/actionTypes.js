@@ -9,3 +9,5 @@ export const SET_ERRORS = "SET_ERRORS";
 export const SET_MESSAGES = "SET_MESSAGES"
 export const SEND_MESSAGE = "SEND_MESSAGE"
 
+// Drafts
+export const SET_DRAFT = "SET_DRAFT"
