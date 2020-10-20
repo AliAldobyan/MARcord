@@ -1,6 +1,7 @@
 import decode from "jwt-decode";
 import instance from "./instance";
-import { SET_CURRENT_USER } from "./actionTypes";
+import { SET_CURRENT_USER, SET_ERRORS } from "./actionTypes";
+import { resetErrors } from "./errors";
 import Cookies from "js-cookie";
 
 export const signup = (userData) => {
@@ -8,9 +9,13 @@ export const signup = (userData) => {
     try {
       const res = await instance.post("/signup/", userData);
       const { token } = res.data;
+      dispatch(resetErrors());
       dispatch(setCurrentUser(token));
     } catch (err) {
-      console.error(err);
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
+      });
     }
   };
 };
@@ -20,9 +25,13 @@ export const login = (userData) => {
     try {
       const res = await instance.post("/login/", userData);
       const { token } = res.data;
+      dispatch(resetErrors());
       dispatch(setCurrentUser(token));
     } catch (err) {
-      console.error(err);
+      dispatch({
+        type: SET_ERRORS,
+        payload: err.response.data,
+      });
     }
   };
 };
