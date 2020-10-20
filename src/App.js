@@ -5,6 +5,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Signup from "./SignupForm";
 import Login from "./LoginForm";
+import ChannelList from "./MainPage";
+import CreateChannel from "./CreateChannel";
 
 const App = () => (
   <div className="container-fluid">
@@ -17,8 +19,14 @@ const App = () => (
           <Route path="/signup">
             <Signup />
           </Route>
+          <Route path="/mainpage">
+            <ChannelList />
+          </Route>
           <Route path="/login">
             <Login />
+          </Route>
+          <Route path="/CreateChannel">
+            <CreateChannel />
           </Route>
         </Switch>
       </div>

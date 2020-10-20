@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "./redux/actions";
-
+import ChannelList from "./MainPage";
 const Sidebar = ({ user, logout }) => (
   <div>
     <div className="fixed-top">
