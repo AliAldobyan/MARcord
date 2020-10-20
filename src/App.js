@@ -5,6 +5,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import HomePage from "./HomePage";
 import Signup from "./SignupForm";
 import Login from "./LoginForm";
+import Chat from "./Chat";
 
 const App = () => (
   <div className="container">
@@ -19,6 +20,9 @@ const App = () => (
         <Route path="/login">
           <Login />
         </Route>
+    <Route path="/channel/:channelID">
+            <Chat />
+          </Route>
       </Switch>
     </div>
   </div>
