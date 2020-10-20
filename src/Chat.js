@@ -15,16 +15,13 @@ const Chat = ({ setMessages, loading, messages }) => {
         const interval = setInterval(() => {
             console.log(messages["timeStamp"])
             setMessages(Number(channelID), messages["timeStamp"])
-        }, 50000);
+        }, 500000);
         return () => clearInterval(interval);
 
     },[channelID, messages["timeStamp"], ])
 
-    console.log(messages["timeStamp"])
     // console.log(loading)
     if (loading) return <h1>loading</h1>
-    // console.log(messages["timeStamp"])
-    // setTimeStamp(messages["messages"].slice(-1)[0].timestamp)
 
     return (
         <div>

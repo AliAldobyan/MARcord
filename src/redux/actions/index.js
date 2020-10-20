@@ -14,3 +14,5 @@ export { resetErrors } from "./errors";
 // Messages
 export { fetchMessages, postMessage } from "./messages"
 
+// Drafts
+export { setNewDraft } from "./drafts"
