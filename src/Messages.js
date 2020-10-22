@@ -3,8 +3,9 @@ import MessageBox from "./MessageBox";
 import {connect} from "react-redux";
 
 const Messages = ({ messages }) => {
+    console.log("actual messages in messages", messages.messages[1], messages.messages[2], messages.messages[3])
     const message = messages["messages"].map((message) => (
-        <MessageBox key={message.id} message={message} />
+        <MessageBox key={message.id + message.message + message.timestamp} message={message} />
     ))
     const bottomRef = useRef();
 
@@ -24,7 +25,7 @@ const Messages = ({ messages }) => {
     }, [message])
 
     return (
-        <div >
+        <div>
             {message}
             <div ref={bottomRef} className="list-bottom" > </div>
         </div>
@@ -34,7 +35,7 @@ const Messages = ({ messages }) => {
 const mapStateToProps = ({ messages, user }) => ({
     messages,
     user,
-    loading: !messages["messages"].length,
+    loading: messages["loading"],
 });
 
 export default connect(mapStateToProps)(Messages);

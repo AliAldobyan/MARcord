@@ -1,5 +1,5 @@
 import instance from "./instance";
-import { SET_MESSAGES, SEND_MESSAGE } from "./actionTypes";
+import { SET_LOCAL_MESSAGES, SET_MESSAGES, SEND_MESSAGE } from "./actionTypes";
 
 export const fetchMessages = (id, timestamp) => async dispatch => {
     try {
@@ -13,6 +13,14 @@ export const fetchMessages = (id, timestamp) => async dispatch => {
     } catch (error) {
         console.error(error);
     }
+};
+
+export const localMessages = (messages) => dispatch => {
+    console.log("local messages", messages)
+    dispatch({
+        type: SET_LOCAL_MESSAGES,
+        payload: messages
+})
 };
 
 export const postMessage = (message, channel) => async dispatch => {

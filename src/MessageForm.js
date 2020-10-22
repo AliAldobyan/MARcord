@@ -1,10 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import { postMessage, setNewDraft } from "./redux/actions";
+import { postMessage } from "./redux/actions";
 import {connect} from "react-redux";
 import Picker from 'emoji-picker-react';
 
-const MessageForm = ({ channel, sendMessage, setNewDraft }) => {
+const MessageForm = ({ channel, sendMessage, user }) => {
+    const channelStorage = `${user.username}${channel}`
     const initial = { message: "" }
+
+    if (localStorage.getItem(channelStorage))
+        initial["message"] = localStorage.getItem(channelStorage)
+
     const [message, setMessage] = useState(initial)
     const [chosenEmoji, setChosenEmoji] = useState(null);
 
@@ -23,12 +28,13 @@ const MessageForm = ({ channel, sendMessage, setNewDraft }) => {
         event.preventDefault()
         console.log(message)
         sendMessage(message, channel)
-        setMessage(initial)
+        localStorage.setItem(channelStorage, "")
+        setMessage({ message: "" })
     }
 
     useEffect(() => {
-        setNewDraft(message, channel)
-    },[channel])
+        localStorage.setItem(channelStorage, message.message)
+    },[message.message])
 
     return (
         <div>
@@ -51,7 +57,6 @@ const mapStateToProps = ({ messages, user }) => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         sendMessage: (message, channelId) => dispatch(postMessage(message, channelId)),
-        setNewDraft: (message, channelId) => dispatch(setNewDraft(message, channelId))
     };
 };
 

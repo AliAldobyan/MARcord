@@ -1,15 +1,15 @@
-import { SET_DRAFT } from "../actions/actionTypes";
+import { SET_HISTORY } from "../actions/actionTypes";
 
 const initialState = {
-    drafts: {}
+    historyMessages: {}
 };
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_DRAFT:
+        case SET_HISTORY:
             return {
                 ...state,
-                drafts: state.drafts[action.payload[0]] = action.payload[1]
+                historyMessages: state.historyMessages[action.payload[0]] = action.payload[1]
             }
         default:
             return state;

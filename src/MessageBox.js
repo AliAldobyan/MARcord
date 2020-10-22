@@ -5,11 +5,6 @@ const MessageBox = ({ message, user }) => {
     let msg = message.message
     return (
         <div>
-            {/*{*/}
-            {/*    message.username === user.username ?*/}
-            {/*    <h5 key={message.id} className="text-danger">{message.username} : <small>{message.message}</small></h5>:*/}
-            {/*    <h5 key={message.id}>{message.username} : <small>{message.message}</small></h5>*/}
-            {/*}*/}
             {(() => {
                 if (message.username === user.username) {
                     if (msg.length > 8){
@@ -17,14 +12,14 @@ const MessageBox = ({ message, user }) => {
                         if (tail.toLowerCase() === ".gif" || tail.toLowerCase() === ".jpg" || tail.toLowerCase() === ".png"){
                             return (
                                 <div>
-                                    <h5 key={message.id} className="text-danger">{message.username}</h5>
-                                    <img key={message.id} src={msg} alt={msg} className="rounded-circle"/>
+                                    <h5 key={message.id} className="user">{message.username}</h5>
+                                    <img key={message.id} src={msg} alt={msg} className="user"/>
                                 </div>
                             )
                         }
                     }
                     return (
-                        <h5 key={message.id} className="text-danger">{message.username} : <small>{msg}</small></h5>
+                        <h5 key={message.id} className="user">{message.username} : <small>{msg}</small></h5>
                     )
                 } else {
                     if (msg.length >= 8){
@@ -32,14 +27,14 @@ const MessageBox = ({ message, user }) => {
                         if (tail.toLowerCase() === ".gif" || tail.toLowerCase() === ".jpg" || tail.toLowerCase() === ".png"){
                             return (
                                 <div>
-                                    <h5 key={message.id}>{message.username}</h5>
-                                    <img key={message.id} src={msg} alt={msg}/>
+                                    <h5 key={message.id} className="bot">{message.username}</h5>
+                                    <img key={message.id} src={msg} alt={msg} className="bot"/>
                                 </div>
                             )
                         }
                     }
                     return (
-                        <h5 key={message.id}>{message.username} : <small>{msg}</small></h5>
+                        <h5 key={message.id} className="bot">{message.username} : <small>{msg}</small></h5>
                     )
                 }
             })()}

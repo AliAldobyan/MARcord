@@ -9,7 +9,7 @@ export { SET_CURRENT_USER } from "./actionTypes";
 export { resetErrors } from "./errors";
 
 // Messages
-export { fetchMessages, postMessage } from "./messages"
+export { fetchMessages, postMessage, localMessages } from "./messages"
 
 // Drafts
-export { setNewDraft } from "./drafts"
+export { setHistory } from "./history"
