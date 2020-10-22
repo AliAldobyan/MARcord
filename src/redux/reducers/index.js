@@ -2,15 +2,18 @@ import { combineReducers } from "redux";
 
 // Reducers
 import userReducer from "./user";
-import messagesReducer from "./messages"
+import messagesReducer from "./messages";
 import errorsReducer from "./errors";
 import historyReducer from "./history"
+import channelsReducer from "./channels";
+
 
 const rootReducer = combineReducers({
   user: userReducer,
   errorMsg: errorsReducer,
   messages: messagesReducer,
   historyMsg: historyReducer,
+  channels: channelsReducer,
 });
 
 export default rootReducer;

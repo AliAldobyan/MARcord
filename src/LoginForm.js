@@ -26,7 +26,7 @@ const Login = ({ login, user, errorMsg, resetErrors }) => {
 
   const { username, password } = userData;
 
-  if (user) return <Redirect to="/" />;
+  if (user) return <Redirect to="/mainpage" />;
 
   const errors = errorMsg;
   console.log(errors);
