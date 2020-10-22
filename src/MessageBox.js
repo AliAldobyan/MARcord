@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { botMessage } from "./redux/actions";
 
+
 const MessageBox = ({ message, user, sendBotMessage }) => {
   let msg = message.message;
   return (

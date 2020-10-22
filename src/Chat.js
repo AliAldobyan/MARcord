@@ -5,6 +5,7 @@ import Messages from "./Messages";
 import MessageForm from "./MessageForm";
 import { fetchMessages, localMessages, setHistory } from "./redux/actions";
 
+
 const Chat = ({
   setMessages,
   loading,
@@ -49,6 +50,7 @@ const Chat = ({
   if (loading) return <h1>loading</h1>;
   console.log("actual messages", messages.messages);
 
+     
   return (
     <div className="chat">
       <Messages />
