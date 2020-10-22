@@ -8,7 +8,7 @@ const ChannelCard = ({ channel }) => {
         <div className="image">
           <img
             className="card-img-top img-fluid"
-            src={channel.image}
+            src={channel.image_url}
             alt={channel.name}
           />
         </div>

@@ -7,12 +7,16 @@ export { SET_CURRENT_USER } from "./actionTypes";
 //Channels
 export * from "./channels";
 
-
 // Errors
 export { resetErrors } from "./errors";
 
 // Messages
-export { fetchMessages, postMessage } from "./messages"
+export {
+  fetchMessages,
+  postMessage,
+  botMessage,
+  localMessages,
+} from "./messages";
 
-// Drafts
-export { setNewDraft } from "./drafts"
+//Bot
+export { botLogin } from "./botAuth";

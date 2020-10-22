@@ -28,7 +28,7 @@ const Signup = ({ signup, user, errorMsg }) => {
   console.log(errors);
 
   const { username, email, password } = userData;
-  if (user) return <Redirect to="/" />;
+  if (user) return <Redirect to="/mainpage" />;
   return (
     <div className="container ">
       <div className="col-6 mx-auto">
