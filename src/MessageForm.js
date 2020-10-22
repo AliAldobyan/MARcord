@@ -12,6 +12,7 @@ const MessageForm = ({ channel, sendMessage, user }) => {
 
   const [message, setMessage] = useState(initial);
   const [chosenEmoji, setChosenEmoji] = useState(null);
+  const [isOpen, setisOpen] = useState(false);
 
   const onEmojiClick = (event, emojiObject) => {
     setChosenEmoji(emojiObject);
@@ -59,8 +60,9 @@ const MessageForm = ({ channel, sendMessage, user }) => {
           onChange={handleChange}
         />
         <button type="submit">send</button>
+        <button></button>
       </form>
-      <Picker onEmojiClick={onEmojiClick} />
+      {isOpen && <Picker onEmojiClick={onEmojiClick} />}
     </div>
   );
 };

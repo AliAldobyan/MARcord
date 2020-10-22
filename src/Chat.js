@@ -15,15 +15,16 @@ const Chat = ({
   const channelID = useParams().channelID;
 
   useEffect(() => {
-    if (localStorage.getItem(`channel${channelID}`) && firstTime) {
-      console.log(firstTime, localStorage.getItem(`channel${channelID}`));
-      // setLocalMessages(localStorage.getItem(`channel${channelID}`))
-      // setMessages(Number(channelID), messages["timeStamp"])
-      setMessages(Number(channelID), messages["timeStamp"]);
-      console.log("yes I made it");
-    } else {
-      setMessages(Number(channelID), messages["timeStamp"]);
-    }
+    // if (localStorage.getItem(`channel${channelID}`) && firstTime) {
+    //   console.log(firstTime, localStorage.getItem(`channel${channelID}`));
+    //   // setLocalMessages(localStorage.getItem(`channel${channelID}`))
+    //   // setMessages(Number(channelID), messages["timeStamp"])
+    //   setMessages(Number(channelID), messages["timeStamp"]);
+    //   console.log("yes I made it");
+    // } else {
+    //   setMessages(Number(channelID), messages["timeStamp"]);
+    // }
+    setMessages(Number(channelID), messages["timeStamp"]);
     // localStorage.setItem(`channel${channelID}`, messages["messages"])
     console.log("actual messages", messages.messages);
     localStorage.setItem(`channel${channelID}`, messages["messages"]);
