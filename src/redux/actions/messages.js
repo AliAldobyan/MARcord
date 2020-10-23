@@ -1,6 +1,6 @@
 import instance from "./instance";
 import bot from "./bot";
-import { SET_LOCAL_MESSAGES, SET_MESSAGES, SEND_MESSAGE } from "./actionTypes";
+import { SET_LOCAL_MESSAGES, SET_MESSAGES, SEND_MESSAGE, FIRST_FETCH } from "./actionTypes";
 
 export const fetchMessages = (id, timestamp) => async (dispatch) => {
   try {
@@ -16,12 +16,18 @@ export const fetchMessages = (id, timestamp) => async (dispatch) => {
   }
 };
 
-export const localMessages = (messages) => (dispatch) => {
-  console.log("local messages", messages);
-  dispatch({
-    type: SET_LOCAL_MESSAGES,
-    payload: messages,
-  });
+export const firstFetch = (id) => async (dispatch) => {
+  try {
+    const res = await instance.get(`/channels/${id}/`);
+    const messages = res.data;
+    console.log("first actions", messages);
+    dispatch({
+      type: FIRST_FETCH,
+      payload: messages,
+    });
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const postMessage = (message, channel) => async (dispatch) => {

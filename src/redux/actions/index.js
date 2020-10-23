@@ -15,7 +15,7 @@ export {
   fetchMessages,
   postMessage,
   botMessage,
-  localMessages,
+  firstFetch,
 } from "./messages";
 
 // History

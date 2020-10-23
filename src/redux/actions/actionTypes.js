@@ -8,6 +8,7 @@ export const SET_ERRORS = "SET_ERRORS";
 export const SET_MESSAGES = "SET_MESSAGES";
 export const SEND_MESSAGE = "SEND_MESSAGE";
 export const SET_LOCAL_MESSAGES = "SET_LOCAL_MESSAGES";
+export const FIRST_FETCH = "FIRST_FETCH";
 
 // History
 export const SET_HISTORY = "SET_HISTORY"
