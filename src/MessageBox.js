@@ -13,10 +13,6 @@ const MessageBox = ({ message, user, sendBotMessage }) => {
       {/*    <h5 key={message.id}>{message.username} : <small>{message.message}</small></h5>*/}
       {/*}*/}
       {(() => {
-        console.log("**************************");
-        console.log(message.timestamp);
-        console.log(new Date().toJSON());
-        console.log(message.timestamp - new Date().toJSON());
         if (message.username === user.username) {
           if (msg.length > 8) {
             let tail = msg.substring(msg.length - 4, msg.length);

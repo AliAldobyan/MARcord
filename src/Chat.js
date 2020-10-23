@@ -3,33 +3,28 @@ import { useParams, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Messages from "./Messages";
 import MessageForm from "./MessageForm";
-import { fetchMessages, localMessages, setHistory } from "./redux/actions";
+import {fetchMessages, firstFetch, setHistory} from "./redux/actions";
 
 
 const Chat = ({
   setMessages,
   loading,
   messages,
-  setLocalMessages,
+  firstTimeFetching,
   firstTime,
 }) => {
   const channelID = useParams().channelID;
+  const [channel, setChannel] = useState(0)
 
   useEffect(() => {
-    // if (localStorage.getItem(`channel${channelID}`) && firstTime) {
-    //   console.log(firstTime, localStorage.getItem(`channel${channelID}`));
-    //   // setLocalMessages(localStorage.getItem(`channel${channelID}`))
-    //   // setMessages(Number(channelID), messages["timeStamp"])
-    //   setMessages(Number(channelID), messages["timeStamp"]);
-    //   console.log("yes I made it");
-    // } else {
-    //   setMessages(Number(channelID), messages["timeStamp"]);
-    // }
-    setMessages(Number(channelID), messages["timeStamp"]);
-    // localStorage.setItem(`channel${channelID}`, messages["messages"])
-    console.log("actual messages", messages.messages);
-    localStorage.setItem(`channel${channelID}`, messages["messages"]);
-    console.log("i caused this", localStorage.getItem(`channel${channelID}`));
+    if (firstTime || channel !== channelID){
+      console.log("first time")
+      setChannel(channelID)
+      firstTimeFetching(Number(channelID));
+    }
+    else
+      setMessages(Number(channelID), messages["timeStamp"]);
+
     const interval = setInterval(() => {
       console.log(messages["timeStamp"]);
       setMessages(Number(channelID), messages["timeStamp"]);
@@ -46,7 +41,7 @@ const Chat = ({
   }, []);
 
   // console.log(loading)
-  console.log("loaclstore", localStorage.getItem(`channel${channelID}`));
+  // console.log("loaclstore", localStorage.getItem(`channel${channelID}`));
   if (loading) return <h1>loading</h1>;
   console.log("actual messages", messages.messages);
 
@@ -71,7 +66,8 @@ const mapDispatchToProps = (dispatch) => {
     setMessages: (channelId, timeStamp) =>
       dispatch(fetchMessages(channelId, timeStamp)),
     // setHistory: (channel, messages) => dispatch(setHistory(channel, messages)),
-    setLocalMessages: (messages) => dispatch(localMessages(messages)),
+    // setLocalMessages: (messages) => dispatch(localMessages(messages)),
+    firstTimeFetching: (channelId) => dispatch(firstFetch(channelId))
   };
 };
 
