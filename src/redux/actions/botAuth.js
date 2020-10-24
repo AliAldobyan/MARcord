@@ -9,7 +9,7 @@ export const botLogin = () => {
       const res = await bot.post("/login/", botuser);
       const { token } = res.data;
 
-      dispatch(setBot(token));
+      const justAFunction = () => dispatch(setBot(token));
     } catch (err) {
       console.error(err);
     }

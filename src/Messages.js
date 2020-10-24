@@ -2,14 +2,14 @@ import React, { useRef, useEffect } from "react";
 import MessageBox from "./MessageBox";
 import { connect } from "react-redux";
 
-const Messages = ({ messages }) => {
-  console.log(
-    "actual messages in messages",
-    messages.messages[1],
-    messages.messages[2],
-    messages.messages[3]
-  );
-  const message = messages["messages"].map((message) => (
+const Messages = ({ messages, channel }) => {
+  // console.log(
+  //   "actual messages in messages",
+  //   messages.messages[1],
+  //   messages.messages[2],
+  //   messages.messages[3]
+  // );
+  const message = messages[channel]["messages"].map((message) => (
     <MessageBox
       key={message.id + message.message + message.timestamp}
       message={message}
@@ -30,7 +30,7 @@ const Messages = ({ messages }) => {
       scrollToBottom();
     }, 500);
     return () => clearTimeout(timeout);
-  }, [message]);
+  }, [messages[channel].messages]);
 
   return (
     <div>
@@ -45,7 +45,7 @@ const Messages = ({ messages }) => {
 const mapStateToProps = ({ messages, user }) => ({
   messages,
   user,
-  loading: messages["loading"],
+  // loading: messages["loading"],
 });
 
 export default connect(mapStateToProps)(Messages);

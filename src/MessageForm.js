@@ -4,20 +4,20 @@ import { connect } from "react-redux";
 import Picker from "emoji-picker-react";
 
 const MessageForm = ({ channel, sendMessage, user }) => {
-  const channelStorage = `${user.username}${channel}`;
+  const channelStorage = `${channel}`;
   const initial = { message: "" };
 
-  if (localStorage.getItem(channelStorage))
-    initial["message"] = localStorage.getItem(channelStorage);
+  useEffect(() => {
+    setMessage({ message: localStorage.getItem(channelStorage) || "" });
+  }, [channel]);
 
-  const [message, setMessage] = useState(initial);
+
+  const [message, setMessage] = useState(initial)
   const [chosenEmoji, setChosenEmoji] = useState(null);
   const [isOpen, setisOpen] = useState(false);
 
   const onEmojiClick = (event, emojiObject) => {
     setChosenEmoji(emojiObject);
-    console.log(emojiObject);
-    console.log(chosenEmoji);
     setMessage({
       ...message,
       ["message"]: message.message + emojiObject.emoji,
@@ -55,6 +55,7 @@ const MessageForm = ({ channel, sendMessage, user }) => {
   // />
   // </div>
   return (
+
     <div className="container">
       <div className="row my-2">
         <div className="col-9">
@@ -89,7 +90,7 @@ const MessageForm = ({ channel, sendMessage, user }) => {
 const mapStateToProps = ({ messages, user }) => ({
   messages,
   user,
-  loading: !messages.length,
+  // loading: !messages.length,
 });
 
 const mapDispatchToProps = (dispatch) => {

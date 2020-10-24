@@ -3,38 +3,39 @@ import { useParams, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Messages from "./Messages";
 import MessageForm from "./MessageForm";
-import { fetchMessages, localMessages, setHistory } from "./redux/actions";
+import {fetchMessages, firstFetch, setHistory} from "./redux/actions";
+
 
 const Chat = ({
   setMessages,
-  loading,
   messages,
-  setLocalMessages,
-  firstTime,
+  firstTimeFetching,
+  timeStamp
 }) => {
   const channelID = useParams().channelID;
+  const [channel, setChannel] = useState(0)
+  const channelName = `channel${channelID}`
+  const loading = messages.loading
+
+
 
   useEffect(() => {
-    // if (localStorage.getItem(`channel${channelID}`) && firstTime) {
-    //   console.log(firstTime, localStorage.getItem(`channel${channelID}`));
-    //   // setLocalMessages(localStorage.getItem(`channel${channelID}`))
-    //   // setMessages(Number(channelID), messages["timeStamp"])
-    //   setMessages(Number(channelID), messages["timeStamp"]);
-    //   console.log("yes I made it");
-    // } else {
-    //   setMessages(Number(channelID), messages["timeStamp"]);
-    // }
-    setMessages(Number(channelID), messages["timeStamp"]);
-    // localStorage.setItem(`channel${channelID}`, messages["messages"])
-    console.log("actual messages", messages.messages);
-    localStorage.setItem(`channel${channelID}`, messages["messages"]);
-    console.log("i caused this", localStorage.getItem(`channel${channelID}`));
+    if (!messages[channelName] || channel !== channelID){
+      console.log("first time")
+      setChannel(channelID)
+      firstTimeFetching(Number(channelID));
+    }
+    // else
+    // const timeStamp = messages[channelName].timeStamp
+
+    setMessages(Number(channelID), timeStamp);
+
     const interval = setInterval(() => {
-      console.log(messages["timeStamp"]);
-      setMessages(Number(channelID), messages["timeStamp"]);
-    }, 15000);
+      console.log(timeStamp);
+      setMessages(Number(channelID), timeStamp);
+    }, 150000);
     return () => clearInterval(interval);
-  }, [channelID, messages["timeStamp"]]);
+  }, [channelID, timeStamp]);
 
   useEffect(() => {
     // setLocalMessages(localStorage.getItem(`channel${channelID}`))
@@ -45,13 +46,17 @@ const Chat = ({
   }, []);
 
   // console.log(loading)
-  console.log("loaclstore", localStorage.getItem(`channel${channelID}`));
-  if (loading) return <h1>loading</h1>;
-  console.log("actual messages", messages.messages);
+  // console.log("loaclstore", localStorage.getItem(`channel${channelID}`));
+  console.log("whole state", messages)
+  console.log(channel, channelID)
+  if (loading || !messages[channelName]) return <h1>loading</h1>;
+  console.log("whole state", messages)
+  console.log("actual messages", messages[channelName].messages);
 
+     
   return (
     <div className="chat">
-      <Messages />
+      <Messages channel={channelName} />
       <MessageForm channel={channelID} />
     </div>
   );
@@ -60,8 +65,9 @@ const Chat = ({
 const mapStateToProps = ({ messages, user }) => ({
   messages,
   user,
-  loading: messages["loading"],
-  firstTime: messages["firstTime"],
+  timeStamp: messages["timeStamp"]
+  // loading,
+  // firstTime: messages["firstTime"],
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -69,7 +75,8 @@ const mapDispatchToProps = (dispatch) => {
     setMessages: (channelId, timeStamp) =>
       dispatch(fetchMessages(channelId, timeStamp)),
     // setHistory: (channel, messages) => dispatch(setHistory(channel, messages)),
-    setLocalMessages: (messages) => dispatch(localMessages(messages)),
+    // setLocalMessages: (messages) => dispatch(localMessages(messages)),
+    firstTimeFetching: (channelId) => dispatch(firstFetch(channelId))
   };
 };
 

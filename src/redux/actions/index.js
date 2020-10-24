@@ -15,8 +15,12 @@ export {
   fetchMessages,
   postMessage,
   botMessage,
+  firstFetch,
   localMessages,
 } from "./messages";
+
+// History
+export { setHistory } from "./history"
 
 //Bot
 export { botLogin } from "./botAuth";
