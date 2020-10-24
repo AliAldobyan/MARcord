@@ -9,7 +9,7 @@ export const fetchMessages = (id, timestamp) => async (dispatch) => {
     console.log("actions", messages);
     dispatch({
       type: SET_MESSAGES,
-      payload: messages,
+      payload: {channel:`channel${id}`, messages: messages},
     });
   } catch (error) {
     console.error(error);
@@ -23,7 +23,20 @@ export const firstFetch = (id) => async (dispatch) => {
     console.log("first actions", messages);
     dispatch({
       type: FIRST_FETCH,
-      payload: messages,
+      payload: {channel:`channel${id}`, messages: messages},
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const localMessages = (id, messages=[]) => (dispatch) => {
+  try {
+    const messages = messages
+    console.log("local messages actions", messages);
+    dispatch({
+      type: SET_LOCAL_MESSAGES,
+      payload: {channel:`channel${id}`, messages: messages},
     });
   } catch (error) {
     console.error(error);
@@ -37,7 +50,7 @@ export const postMessage = (message, channel) => async (dispatch) => {
 
     dispatch({
       type: SEND_MESSAGE,
-      payload: newMessage,
+      payload: {channel:`channel${channel}`, messages: newMessage},
     });
   } catch (error) {
     console.error(error.response.data);
@@ -51,7 +64,7 @@ export const botMessage = (message, channel) => async (dispatch) => {
     const newMessage = res.data;
     dispatch({
       type: SEND_MESSAGE,
-      payload: newMessage,
+      payload: {channel:`channel${channel}`, messages: newMessage},
     });
   } catch (error) {
     console.error(error.response.data);
