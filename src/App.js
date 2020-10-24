@@ -12,7 +12,9 @@ import Chat from "./Chat";
 const App = () => (
   <div className="container">
     <div className="row">
-      <Link to="/channels/812">Channel</Link>
+      <Link to="/channels/812">812</Link>
+      <Link to="/channels/831">831</Link>
+      <Link to="/channels/788">788</Link>
       <HomePage />
     </div>
     <div className="row">
