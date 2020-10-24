@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { botMessage } from "./redux/actions";
 
 
-const MessageBox = ({ message, user, sendBotMessage }) => {
+const MessageBox = ({ message, user }) => {
+
   let msg = message.message;
   return (
     <div>
@@ -21,7 +21,6 @@ const MessageBox = ({ message, user, sendBotMessage }) => {
               tail.toLowerCase() === ".jpg" ||
               tail.toLowerCase() === ".png"
             ) {
-              //sendBotMessage("854", { message: "I am your Bot" });
               return (
                 <div>
                   <h5 key={message.id} className="text-danger">
@@ -60,6 +59,12 @@ const MessageBox = ({ message, user, sendBotMessage }) => {
                 </div>
               );
             }
+          } else if (message.username === "MARcord") {
+            return (
+              <h5 key={message.id}>
+                {message.username} : <small>{msg}</small>
+              </h5>
+            );
           }
 
           return (
@@ -76,9 +81,5 @@ const MessageBox = ({ message, user, sendBotMessage }) => {
 const mapStateToProps = ({ user }) => ({
   user,
 });
-const mapDispatchToProps = (dispatch) => ({
-  sendBotMessage: (message, channelId) =>
-    dispatch(botMessage(message, channelId)),
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(MessageBox);
+export default connect(mapStateToProps)(MessageBox);

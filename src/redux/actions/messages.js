@@ -47,6 +47,54 @@ export const postMessage = (message, channel) => async (dispatch) => {
   try {
     const res = await instance.post(`/channels/${channel}/send/`, message);
     const newMessage = res.data;
+    const messageToBot = newMessage.message.toLowerCase();
+
+    if (messageToBot === "hi bot") {
+      dispatch(
+        botMessage(
+          {
+            message: `Hi ${newMessage.username}, I'm MARcord Bot and you can send me one of these arrays [food], [dance], [happy], [excited],so I display a gif for you`,
+          },
+          channel
+        )
+      );
+    } else if (messageToBot === "[food]") {
+      dispatch(
+        botMessage(
+          {
+            message: "https://media.giphy.com/media/SasDDqOSRclNu/giphy.gif",
+          },
+          channel
+        )
+      );
+    } else if (messageToBot === "[dance]") {
+      dispatch(
+        botMessage(
+          {
+            message: "https://media.giphy.com/media/6fScAIQR0P0xW/giphy.gif",
+          },
+          channel
+        )
+      );
+    } else if (messageToBot === "[happy]") {
+      dispatch(
+        botMessage(
+          {
+            message: "https://media.giphy.com/media/14udF3WUwwGMaA/giphy.gif",
+          },
+          channel
+        )
+      );
+    } else if (messageToBot === "[excited]") {
+      dispatch(
+        botMessage(
+          {
+            message: "https://media.giphy.com/media/UO5elnTqo4vSg/giphy.gif",
+          },
+          channel
+        )
+      );
+    }
 
     dispatch({
       type: SEND_MESSAGE,
@@ -62,10 +110,12 @@ export const botMessage = (message, channel) => async (dispatch) => {
   try {
     const res = await bot.post(`/channels/${channel}/send/`, message);
     const newMessage = res.data;
-    dispatch({
-      type: SEND_MESSAGE,
-      payload: {channel:`channel${channel}`, messages: newMessage},
-    });
+
+    // dispatch({
+    //   type: SEND_MESSAGE,
+    //   payload: newMessage,
+    // });
+
   } catch (error) {
     console.error(error.response.data);
   }
