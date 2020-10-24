@@ -1,9 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-
 const MessageBox = ({ message, user }) => {
-
   let msg = message.message;
   return (
     <div>
@@ -59,13 +57,14 @@ const MessageBox = ({ message, user }) => {
                 </div>
               );
             }
-          } else if (message.username === "MARcord") {
-            return (
-              <h5 key={message.id}>
-                {message.username} : <small>{msg}</small>
-              </h5>
-            );
           }
+          //   else if (message.username === "MARcord") {
+          //     return (
+          //       <h5 key={message.id} className="text-info">
+          //         {message.username} : <small>{msg}</small>
+          //       </h5>
+          //     );
+          //   }
 
           return (
             <h5 key={message.id}>
