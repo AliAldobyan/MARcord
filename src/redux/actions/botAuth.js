@@ -27,15 +27,3 @@ const setBotToken = (token) => {
     bot.defaults.headers.Authorization = `jwt ${token}`;
   }
 };
-
-// export const checkForExpiredBotToken = () => {
-//   const token = Cookies.get("Bottoken");
-//   if (token) {
-//     const currentTimeInSeconds = Date.now() / 1000;
-//     const bot = decode(token);
-//     if (bot.exp >= currentTimeInSeconds) {
-//       return setBot(token);
-//     }
-//   }
-//   return botLogin();
-// };

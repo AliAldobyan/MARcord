@@ -22,6 +22,7 @@ const MessageForm = ({ channel, sendMessage, user }) => {
       ...message,
       ["message"]: message.message + emojiObject.emoji,
     });
+    setisOpen(!isOpen);
   };
 
   const handleChange = (event) => {
@@ -34,6 +35,10 @@ const MessageForm = ({ channel, sendMessage, user }) => {
     sendMessage(message, channel);
     localStorage.setItem(channelStorage, "");
     setMessage({ message: "" });
+  };
+
+  const handelEmoji = (event) => {
+    setisOpen(!isOpen);
   };
 
   useEffect(() => {
@@ -50,19 +55,33 @@ const MessageForm = ({ channel, sendMessage, user }) => {
   // />
   // </div>
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="message"
-          value={message.message}
-          required
-          onChange={handleChange}
-        />
-        <button type="submit">send</button>
-        <button></button>
-      </form>
-      {isOpen && <Picker onEmojiClick={onEmojiClick} />}
+    <div className="container">
+      <div className="row my-2">
+        <div className="col-9">
+          <form>
+            <input
+              type="text"
+              name="message"
+              value={message.message}
+              required
+              onChange={handleChange}
+            />
+          </form>
+        </div>
+        <div className="col-5">
+          <button
+            type="submit"
+            className="btn btn-primary ml-3"
+            onClick={handleSubmit}
+          >
+            send
+          </button>
+          <button onClick={handelEmoji} className="btn btn-success ml-2">
+            😎
+          </button>
+          {isOpen && <Picker onEmojiClick={onEmojiClick} />}
+        </div>
+      </div>
     </div>
   );
 };
