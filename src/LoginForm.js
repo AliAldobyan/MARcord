@@ -29,7 +29,6 @@ const Login = ({ login, user, errorMsg, resetErrors }) => {
   if (user) return <Redirect to="/mainpage" />;
 
   const errors = errorMsg;
-  console.log(errors);
 
   return (
     <div className="container">

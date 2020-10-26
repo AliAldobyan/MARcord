@@ -11,7 +11,6 @@ export const fetchChannels = () => async (dispatch) => {
     });
   } catch (error) {
     console.error(error);
-    console.log("ERROR");
   }
 };
 
@@ -19,7 +18,6 @@ export const createChannel = (channel_name) => async (dispatch) => {
   try {
     const res = await instance.post("/channels/create/", channel_name);
     const newChannel = res.data;
-    console.log("channel added");
 
     dispatch({
       type: CREATE_CHANNEL,
@@ -27,6 +25,5 @@ export const createChannel = (channel_name) => async (dispatch) => {
     });
   } catch (error) {
     console.error(error.response.data);
-    console.log("error when creating channel");
   }
 };

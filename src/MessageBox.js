@@ -5,11 +5,6 @@ const MessageBox = ({ message, user }) => {
   let msg = message.message;
   return (
     <div>
-      {/*{*/}
-      {/*    message.username === user.username ?*/}
-      {/*    <h5 key={message.id} className="text-danger">{message.username} : <small>{message.message}</small></h5>:*/}
-      {/*    <h5 key={message.id}>{message.username} : <small>{message.message}</small></h5>*/}
-      {/*}*/}
       {(() => {
         if (message.username === user.username) {
           if (msg.length > 8) {
@@ -20,25 +15,20 @@ const MessageBox = ({ message, user }) => {
               tail.toLowerCase() === ".png"
             ) {
               return (
-                <div>
-                  <h5 key={message.id} className="text-danger">
+                <div key={message.id + message.username} className="user">
+                  <h5 >
                     {message.username}
                   </h5>
                   <img
-                    key={message.id}
                     src={msg}
                     alt={msg}
-                    className="rounded-circle"
                   />
                 </div>
               );
             }
           }
-          //   if (msg === "hello bot") {
-          //     sendBotMessage({ message: "I am your Bot" }, "854");
-          //   }
           return (
-            <h5 key={message.id} className="text-danger">
+            <h5 key={message.id} className="user">
               {message.username} : <small>{msg}</small>
             </h5>
           );
@@ -51,23 +41,16 @@ const MessageBox = ({ message, user }) => {
               tail.toLowerCase() === ".png"
             ) {
               return (
-                <div>
-                  <h5 key={message.id}>{message.username}</h5>
-                  <img key={message.id} src={msg} alt={msg} />
+                <div key={message.id} className="bot">
+                  <h5 >{message.username}</h5>
+                  <img src={msg} alt={msg} />
                 </div>
               );
             }
           }
-          //   else if (message.username === "MARcord") {
-          //     return (
-          //       <h5 key={message.id} className="text-info">
-          //         {message.username} : <small>{msg}</small>
-          //       </h5>
-          //     );
-          //   }
 
           return (
-            <h5 key={message.id}>
+            <h5 key={message.id} className="bot">
               {message.username} : <small>{msg}</small>
             </h5>
           );

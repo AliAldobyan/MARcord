@@ -25,7 +25,6 @@ const Signup = ({ signup, user, errorMsg }) => {
   };
 
   const errors = errorMsg;
-  console.log(errors);
 
   const { username, email, password } = userData;
   if (user) return <Redirect to="/mainpage" />;

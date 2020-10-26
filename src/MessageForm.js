@@ -3,7 +3,7 @@ import { postMessage } from "./redux/actions";
 import { connect } from "react-redux";
 import Picker from "emoji-picker-react";
 
-const MessageForm = ({ channel, sendMessage, user }) => {
+const MessageForm = ({ channel, sendMessage }) => {
   const channelStorage = `${channel}`;
   const initial = { message: "" };
 
@@ -31,7 +31,6 @@ const MessageForm = ({ channel, sendMessage, user }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(message);
     sendMessage(message, channel);
     localStorage.setItem(channelStorage, "");
     setMessage({ message: "" });
@@ -45,21 +44,12 @@ const MessageForm = ({ channel, sendMessage, user }) => {
     localStorage.setItem(channelStorage, message.message);
   }, [message.message]);
 
-  //     <div className="col-6">
-  // {" "}
-  // <Picker
-  //   onEmojiClick={onEmojiClick}
-  //   style={{
-  //     marginBottom: "140px",
-  //   }}
-  // />
-  // </div>
   return (
 
     <div className="container">
       <div className="row my-2">
         <div className="col-9">
-          <form>
+          <form onSubmit={handleSubmit}>
             <input
               type="text"
               name="message"
@@ -68,29 +58,29 @@ const MessageForm = ({ channel, sendMessage, user }) => {
               onChange={handleChange}
             />
           </form>
+            <button
+                type="submit"
+                className="btn btn-primary ml-3"
+            >
+              send
+            </button>
+            <button onClick={handelEmoji} className="btn btn-success ml-2">
+              😎
+            </button>
+            {isOpen && <Picker onEmojiClick={onEmojiClick} />}
         </div>
         <div className="col-5">
-          <button
-            type="submit"
-            className="btn btn-primary ml-3"
-            onClick={handleSubmit}
-          >
-            send
-          </button>
-          <button onClick={handelEmoji} className="btn btn-success ml-2">
-            😎
-          </button>
-          {isOpen && <Picker onEmojiClick={onEmojiClick} />}
+
+
+
         </div>
       </div>
     </div>
   );
 };
 
-const mapStateToProps = ({ messages, user }) => ({
+const mapStateToProps = ({ messages }) => ({
   messages,
-  user,
-  // loading: !messages.length,
 });
 
 const mapDispatchToProps = (dispatch) => {

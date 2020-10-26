@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+
 
 // Components
 import ChannelCard from "./ChannelCard";
 import SearchBar from "./SearchBar";
 import Sidebar from "./Sidebar";
+import Loading from "./Loading";
 
-const ChannelList = ({ channels }) => {
+const ChannelList = ({ channels, loading, user }) => {
   const [query, setQuery] = useState("");
 
   const filterChannels = channels.filter((channel) => {
     return `${channel.name}`.toLowerCase().includes(query.toLowerCase());
   });
-
-  //   console.log("test", channels);
-  //   console.log(filterChannels);
+    if (!user) return <Redirect to="/login" />
+    if (loading) return <Loading/>
   const Channelcards = filterChannels.map((channel) => (
     <ChannelCard key={channel.id} channel={channel} />
   ));
@@ -31,7 +33,9 @@ const ChannelList = ({ channels }) => {
 
 const mapStateToProps = (state) => {
   return {
+    user: state.user,
     channels: state.channels,
+    loading: !state.channels.length
   };
 };
 export default connect(mapStateToProps)(ChannelList);

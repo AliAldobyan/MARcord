@@ -18,7 +18,8 @@ export const botLogin = () => {
 
 const setBot = (token) => {
   setBotToken(token);
-  const bot = token ? decode(token) : null;
+  if (token) decode(token)
+  else return null;
 };
 
 const setBotToken = (token) => {
