@@ -3,6 +3,7 @@ import instance from "./instance";
 import { SET_CURRENT_USER, SET_ERRORS } from "./actionTypes";
 import { resetErrors } from "./errors";
 import Cookies from "js-cookie";
+import {fetchChannels} from "./channels";
 
 export const signup = (userData) => {
   return async (dispatch) => {
@@ -11,6 +12,7 @@ export const signup = (userData) => {
       const { token } = res.data;
       dispatch(resetErrors());
       dispatch(setCurrentUser(token));
+      dispatch(fetchChannels())
     } catch (err) {
       dispatch({
         type: SET_ERRORS,
@@ -27,6 +29,7 @@ export const login = (userData) => {
       const { token } = res.data;
       dispatch(resetErrors());
       dispatch(setCurrentUser(token));
+      dispatch(fetchChannels())
     } catch (err) {
       dispatch({
         type: SET_ERRORS,

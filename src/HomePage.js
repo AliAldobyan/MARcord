@@ -8,7 +8,7 @@ import "./App.css";
 const HomePage = ({ user, logout }) => (
   <div className="container App">
     <div className="container">
-      <img src={logo} className="App-logo" alt="logo"></img>
+      <img src={logo} className="App-logo" alt="logo" />
     </div>
     {user ? (
       <Link
